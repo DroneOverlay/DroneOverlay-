@@ -7,7 +7,7 @@ document.getElementById('tiffInput').addEventListener('change', async (event) =>
     if (!file) return;
     const arrayBuffer = await file.arrayBuffer();
     const georaster = await parseGeoraster(arrayBuffer);
-    const layer = new GeoRasterLayer({ georaster, opacity: 0.7 });
+    const layer = new GeoRasterLayer({ georaster, opacity: 0.85 });
     layer.addTo(map);
     map.fitBounds(layer.getBounds());
 });
@@ -27,7 +27,7 @@ document.getElementById('vectorInput').addEventListener('change', async (event) 
             const geojson = toGeoJSON.kml(kmlDoc);
             L.geoJSON(geojson).addTo(map);
         } else {
-            alert("Unsupported file format");
+            alert("Unsupported file format. Only .geojson and .kml are supported for overlays.");
         }
     };
     reader.readAsText(file);
